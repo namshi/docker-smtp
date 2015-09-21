@@ -1,10 +1,11 @@
 # Docker-SMTP
 
 This is a SMTP docker container for sending emails. You can also relay emails to gmail and amazon SES.
-<br/>
-<br/>
 
-Below are scenarios for using this container
+## Environment variables
+The container accepts `RELAY_NETWORKS` environment variable which *MUST* start with `:` e.g `:192.168.0.0/24` or `:192.168.0.0/24:10.0.0.0/16`.
+
+## Below are scenarios for using this container
 
 ### As SMTP Rerver
 You don't need to specify any environment variable to get this up.

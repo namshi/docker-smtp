@@ -1,10 +1,13 @@
 #!/bin/bash
 set -e
 
+if [ "$RELAY_NETWORK" ]; then
+fi
+
 opts=(
 	dc_local_interfaces '0.0.0.0 ; ::0'
 	dc_other_hostnames ''
-	dc_relay_nets "$(ip addr show dev eth0 | awk '$1 == "inet" { print $2 }')"
+	dc_relay_nets "$(ip addr show dev eth0 | awk '$1 == "inet" { print $2 }')${RELAY_NETWORKS}"
 )
 
 if [ "$GMAIL_USER" -a "$GMAIL_PASSWORD" ]; then

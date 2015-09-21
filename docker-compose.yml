@@ -8,3 +8,4 @@ smtp:
     SES_USER:
     SES_PASSWORD:
     SES_REGION:
+    RELAY_NETWORKS:
