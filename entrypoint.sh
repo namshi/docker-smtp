@@ -1,9 +1,6 @@
 #!/bin/bash
 set -e
 
-if [ "$RELAY_NETWORK" ]; then
-fi
-
 opts=(
 	dc_local_interfaces '0.0.0.0 ; ::0'
 	dc_other_hostnames ''
