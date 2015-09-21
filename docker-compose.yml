@@ -1,0 +1,10 @@
+smtp:
+  build: .
+  ports:
+   - "25:25"
+  environment:
+    GMAIL_USER:
+    GMAIL_PASSWORD:
+    SES_USER:
+    SES_PASSWORD:
+    SES_REGION:
