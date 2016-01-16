@@ -19,6 +19,11 @@ elif [ "$SES_USER" -a "$SES_PASSWORD" ]; then
 		dc_smarthost "email-smtp.${SES_REGION:=us-east-1}.amazonaws.com::587"
 	)
 	echo "*.amazonaws.com:$SES_USER:$SES_PASSWORD" > /etc/exim4/passwd.client
+elif [ "$RELAY_DOMAINS" ]; then
+	opts+=(
+		dc_relay_domains "${RELAY_DOMAINS}"
+		dc_eximconfig_configtype 'internet'
+	)
 else
 	opts+=(
 		dc_eximconfig_configtype 'internet'

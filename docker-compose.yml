@@ -9,3 +9,4 @@ smtp:
     SES_PASSWORD:
     SES_REGION:
     RELAY_NETWORKS:
+    RELAY_DOMAINS:

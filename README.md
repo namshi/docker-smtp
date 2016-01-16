@@ -7,8 +7,12 @@ The container accepts `RELAY_NETWORKS` environment variable which *MUST* start w
 
 ## Below are scenarios for using this container
 
-### As SMTP Rerver
+### As SMTP Server
 You don't need to specify any environment variable to get this up.
+
+### As a Secondary SMTP Server
+Specify 'RELAY_DOMAINS' to setup what domains should be accepted to forward to lower distance MX server.
+Format is <domain1> : <domain2> : <domain3> etc
 
 ### As Gmail Relay
 You need to set the `GMAIL_USER` and `GMAIL_PASSWORD` to be able to use it.
