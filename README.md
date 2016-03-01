@@ -1,4 +1,5 @@
 # Docker-SMTP
+[![](https://badge.imagelayers.io/namshi/smtp:latest.svg)](https://imagelayers.io/?images=namshi/smtp:latest)
 
 This is a SMTP docker container for sending emails. You can also relay emails to gmail and amazon SES.
 
