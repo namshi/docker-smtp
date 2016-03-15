@@ -1,6 +1,15 @@
 #!/bin/bash
 set -e
 
+if [ "$KEY_PATH" -a "$CERTIFICATE_PATH" ]; then
+	echo "MAIN_TLS_ENABLE = yes" >>  /etc/exim4/exim4.conf.localmacros
+	cp $KEY_PATH /etc/exim4/exim.key
+	cp $CERTIFICATE_PATH /etc/exim4/exim.crt
+	chgrp Debian-exim /etc/exim4/exim.key
+	chgrp Debian-exim /etc/exim4/exim.crt
+	chmod 640 /etc/exim4/exim.key
+	chmod 640 /etc/exim4/exim.crt
+fi
 opts=(
 	dc_local_interfaces '0.0.0.0 ; ::0'
 	dc_other_hostnames ''

@@ -5,6 +5,7 @@ This is a SMTP docker container for sending emails. You can also relay emails to
 
 ## Environment variables
 The container accepts `RELAY_NETWORKS` environment variable which *MUST* start with `:` e.g `:192.168.0.0/24` or `:192.168.0.0/24:10.0.0.0/16`.
+The container accepts 'KEY_PATH' and 'CERTIFICATE_PATH' environment variable that if provided will enable TLS support. The paths must be to the key and certificate file on a exposed volume.  The keys will be copied into the container location.
 
 ## Below are scenarios for using this container
 
