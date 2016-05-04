@@ -2,12 +2,16 @@
 set -e
 
 if [ "$MAILNAME" ]; then
-	echo "MAIN_HARDCODE_PRIMARY_HOSTNAME = $MAILNAME" >> /etc/exim4/exim4.conf.localmacros
+	echo "MAIN_HARDCODE_PRIMARY_HOSTNAME = $MAILNAME" > /etc/exim4/exim4.conf.localmacros
 	echo $MAILNAME > /etc/mailname
 fi
 
 if [ "$KEY_PATH" -a "$CERTIFICATE_PATH" ]; then
-	echo "MAIN_TLS_ENABLE = yes" >>  /etc/exim4/exim4.conf.localmacros
+	if [ "$MAILNAME" ]; then
+	  echo "MAIN_TLS_ENABLE = yes" >>  /etc/exim4/exim4.conf.localmacros
+	else
+		echo "MAIN_TLS_ENABLE = yes" >  /etc/exim4/exim4.conf.localmacros
+	fi
 	cp $KEY_PATH /etc/exim4/exim.key
 	cp $CERTIFICATE_PATH /etc/exim4/exim.crt
 	chgrp Debian-exim /etc/exim4/exim.key
