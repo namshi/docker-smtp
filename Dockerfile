@@ -16,4 +16,4 @@ RUN chmod a+x /bin/entrypoint.sh && \
 
 EXPOSE 25
 ENTRYPOINT ["/bin/entrypoint.sh"]
-CMD ["exim", "-bd", "-v"]
+CMD ["exim", "-bd", "-q15m", "-v"]
