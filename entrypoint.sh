@@ -38,6 +38,19 @@ elif [ "$SES_USER" -a "$SES_PASSWORD" ]; then
 		dc_smarthost "email-smtp.${SES_REGION:=us-east-1}.amazonaws.com::587"
 	)
 	echo "*.amazonaws.com:$SES_USER:$SES_PASSWORD" > /etc/exim4/passwd.client
+# Allow to specify an arbitrary smarthost.
+# Parameters: SMARTHOST_USER, SMARTHOST_PASSWORD: authentication parameters
+# SMARTHOST_ALIASES: list of aliases to puth auth data for (semicolon separated)
+# SMARTHOST_ADDRESS, SMARTHOST_PORT: connection parameters.
+elif [ "$SMARTHOST_USER" -a "$SMARTHOST_PASSWORD" ] && [ "$SMARTHOST_ALIASES" -a "$SMARTHOST_ADDRESS" ] ; then
+	opts+=(
+		dc_eximconfig_configtype 'smarthost'
+		dc_smarthost "${SMARTHOST_ADDRESS}::${SMARTHOST_PORT-25}"
+	)
+	rm -f /etc/exim4/passwd.client
+	echo "$SMARTHOST_ALIASES;" | while read -d ";" alias; do
+	  echo "${alias}:$SMARTHOST_USER:$SMARTHOST_PASSWORD" >> /etc/exim4/passwd.client
+	done
 elif [ "$RELAY_DOMAINS" ]; then
 	opts+=(
 		dc_relay_domains "${RELAY_DOMAINS}"
