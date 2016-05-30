@@ -25,3 +25,14 @@ You need to set the `GMAIL_USER` and `GMAIL_PASSWORD` to be able to use it.
 ### As Amazon SES Relay
 You need to set the `SES_USER` and `SES_PASSWORD` to be able to use it.<br/>
 You can override the SES region by setting `SES_REGION` as well.
+### As generic SMTP Relay
+You can also use any generic SMTP server with authentication as smarthost.
+You need to set `SMARTHOST_ADDRESS`, `SMARTHOST_PORT` (connection parameters), `SMARTHOST_USER`, `SMARTHOST_PASSWORD` (authentication parameters), and `SMARTHOST_ALIASES`: this is a list of aliases to puth auth data for authentication, semicolon separated.
+Example:
+
+ * SMARTHOST_ADDRESS=mail.mysmtp.com
+ * SMARTHOST_PORT=587
+ * SMARTHOST_USER=myuser
+ * SMARTHOST_PASSWORD=secret
+ * SMARTHOST_ALIASES=*.mysmtp.com
+
