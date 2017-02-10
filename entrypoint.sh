@@ -26,6 +26,10 @@ opts=(
 	dc_relay_nets "$(ip addr show dev eth0 | awk '$1 == "inet" { print $2 }')${RELAY_NETWORKS}"
 )
 
+if [ "$DISABLE_IPV6" ]; then 
+        echo 'disable_ipv6=true' >> /etc/exim4/exim4.conf.localmacros
+fi
+
 if [ "$GMAIL_USER" -a "$GMAIL_PASSWORD" ]; then
 	opts+=(
 		dc_eximconfig_configtype 'smarthost'
