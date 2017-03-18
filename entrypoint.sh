@@ -10,7 +10,7 @@ if [ "$KEY_PATH" -a "$CERTIFICATE_PATH" ]; then
 	if [ "$MAILNAME" ]; then
 	  echo "MAIN_TLS_ENABLE = yes" >>  /etc/exim4/exim4.conf.localmacros
 	else
-		echo "MAIN_TLS_ENABLE = yes" >  /etc/exim4/exim4.conf.localmacros
+	  echo "MAIN_TLS_ENABLE = yes" >>  /etc/exim4/exim4.conf.localmacros
 	fi
 	cp $KEY_PATH /etc/exim4/exim.key
 	cp $CERTIFICATE_PATH /etc/exim4/exim.crt
