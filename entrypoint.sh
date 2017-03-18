@@ -66,6 +66,11 @@ else
 	)
 fi
 
+# allow to add additional macros by bind-mounting a file
+if [ -f /etc/exim4/_docker_additional_macros ]; then
+	cat /etc/exim4/_docker_additional_macros >> /etc/exim4/exim4.conf.localmacros
+fi
+
 /bin/set-exim4-update-conf "${opts[@]}"
 
 exec "$@"
