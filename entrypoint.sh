@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
 
+# Initialize localmacros as an empty file
+echo -n "" > /etc/exim4/exim4.conf.localmacros
+
 if [ "$MAILNAME" ]; then
 	echo "MAIN_HARDCODE_PRIMARY_HOSTNAME = $MAILNAME" > /etc/exim4/exim4.conf.localmacros
 	echo $MAILNAME > /etc/mailname
