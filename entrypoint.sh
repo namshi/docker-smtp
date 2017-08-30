@@ -42,7 +42,7 @@ if [ "$GMAIL_USER" -a "$GMAIL_PASSWORD" ]; then
 elif [ "$SES_USER" -a "$SES_PASSWORD" ]; then
 	opts+=(
 		dc_eximconfig_configtype 'smarthost'
-		dc_smarthost "email-smtp.${SES_REGION:=us-east-1}.amazonaws.com::${SES_PORT=587}"
+		dc_smarthost "email-smtp.${SES_REGION:=us-east-1}.amazonaws.com::${SES_PORT:=587}"
 	)
 	echo "*.amazonaws.com:$SES_USER:$SES_PASSWORD" > /etc/exim4/passwd.client
 # Allow to specify an arbitrary smarthost.
