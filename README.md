@@ -31,6 +31,7 @@ You need to set the `GMAIL_USER` and `GMAIL_PASSWORD` to be able to use it.
 ### As Amazon SES Relay
 You need to set the `SES_USER` and `SES_PASSWORD` to be able to use it.<br/>
 You can override the SES region by setting `SES_REGION` as well.
+If you use Google Compute Engine you also should set `SES_PORT` to 2587.
 
 ### As generic SMTP Relay
 You can also use any generic SMTP server with authentication as smarthost.</br>
