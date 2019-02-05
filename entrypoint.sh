@@ -37,12 +37,14 @@ if [ "$GMAIL_USER" -a "$GMAIL_PASSWORD" ]; then
 	opts+=(
 		dc_eximconfig_configtype 'smarthost'
 		dc_smarthost 'smtp.gmail.com::587'
+		dc_relay_domains "${RELAY_DOMAINS}"
 	)
 	echo "*.google.com:$GMAIL_USER:$GMAIL_PASSWORD" > /etc/exim4/passwd.client
 elif [ "$SES_USER" -a "$SES_PASSWORD" ]; then
 	opts+=(
 		dc_eximconfig_configtype 'smarthost'
 		dc_smarthost "email-smtp.${SES_REGION:=us-east-1}.amazonaws.com::${SES_PORT:=587}"
+		dc_relay_domains "${RELAY_DOMAINS}"
 	)
 	echo "*.amazonaws.com:$SES_USER:$SES_PASSWORD" > /etc/exim4/passwd.client
 # Allow to specify an arbitrary smarthost.
@@ -53,6 +55,7 @@ elif [ "$SMARTHOST_ADDRESS" ] ; then
 	opts+=(
 		dc_eximconfig_configtype 'smarthost'
 		dc_smarthost "${SMARTHOST_ADDRESS}::${SMARTHOST_PORT-25}"
+		dc_relay_domains "${RELAY_DOMAINS}"
 	)
 	rm -f /etc/exim4/passwd.client
 	if [ "$SMARTHOST_ALIASES" -a "$SMARTHOST_USER" -a "$SMARTHOST_PASSWORD" ] ; then
