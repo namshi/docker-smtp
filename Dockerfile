@@ -1,4 +1,4 @@
-FROM debian:stretch
+FROM debian:buster
 
 MAINTAINER Oluwaseun Obajobi "oluwaseun.obajobi@namshi.com"
 
