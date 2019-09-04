@@ -15,6 +15,8 @@ The container also accepts the `PORT` environment variable, to set the port the 
 
 To disable IPV6 you can set the `DISABLE_IPV6` environment variable to any value.
 
+The container accepts `OTHER_HOSTNAMES` environment variable which will set the list of domains for which this machine should consider itself the final destination.
+
 ## Below are scenarios for using this container
 
 ### As SMTP Server
