@@ -39,7 +39,7 @@ if [ "$GMAIL_USER" -a "$GMAIL_PASSWORD" ]; then
 		dc_smarthost 'smtp.gmail.com::587'
 		dc_relay_domains "${RELAY_DOMAINS}"
 	)
-	echo "*.google.com:$GMAIL_USER:$GMAIL_PASSWORD" > /etc/exim4/passwd.client
+	echo "*.gmail.com:$GMAIL_USER:$GMAIL_PASSWORD" > /etc/exim4/passwd.client
 elif [ "$SES_USER" -a "$SES_PASSWORD" ]; then
 	opts+=(
 		dc_eximconfig_configtype 'smarthost'
