@@ -13,6 +13,8 @@ The container accepts `MAILNAME` environment variable which will set the outgoin
 
 The container also accepts the `PORT` environment variable, to set the port the mail daemon will listen on inside the container. The default port is `25`.
 
+To configure the binding address, you can use `BIND_IP` and `BIND_IP6` environment variables. The default `BIND_IP` is `0.0.0.0`. The default `BIND_IP6` is `::0`.
+
 To disable IPV6 you can set the `DISABLE_IPV6` environment variable to any value.
 
 The container accepts `OTHER_HOSTNAMES` environment variable which will set the list of domains for which this machine should consider itself the final destination.
