@@ -63,6 +63,24 @@ elif [ "$SMARTHOST_ADDRESS" ] ; then
 			echo "${alias}:$SMARTHOST_USER:$SMARTHOST_PASSWORD" >> /etc/exim4/passwd.client
 		done
 	fi
+	if [ "$KEY_PATH" -a "$CERTIFICATE_PATH" ]; then
+		echo "MAIN_TLS_ENABLE == 1" >>  /etc/exim4/exim4.conf.localmacros
+		echo "REMOTE_SMTP_SMARTHOST_HOSTS_REQUIRE_TLS = *" >>  /etc/exim4/exim4.conf.localmacros
+		echo "TLS_ON_CONNECT_PORTS = $SMARTHOST_PORT" >>  /etc/exim4/exim4.conf.localmacros
+		echo "REQUIRE_PROTOCOL = smtps" >>  /etc/exim4/exim4.conf.localmacros
+
+		(
+			echo .ifdef REQUIRE_PROTOCOL
+			echo protocol = REQUIRE_PROTOCOL
+			echo .endif
+		) > /etc/exim4/exim4.conf.template
+
+		(
+			echo .ifdef TLS_ON_CONNECT_PORTS
+			echo tls_on_connect_ports = TLS_ON_CONNECT_PORTS
+			echo .endif
+		) > /etc/exim4/exim4.conf.template
+	fi
 elif [ "$RELAY_DOMAINS" ]; then
 	opts+=(
 		dc_relay_domains "${RELAY_DOMAINS}"
