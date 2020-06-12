@@ -66,20 +66,11 @@ elif [ "$SMARTHOST_ADDRESS" ] ; then
 	if [ "$KEY_PATH" -a "$CERTIFICATE_PATH" ]; then
 		echo "MAIN_TLS_ENABLE == 1" >>  /etc/exim4/exim4.conf.localmacros
 		echo "REMOTE_SMTP_SMARTHOST_HOSTS_REQUIRE_TLS = *" >>  /etc/exim4/exim4.conf.localmacros
-		echo "TLS_ON_CONNECT_PORTS = $SMARTHOST_PORT" >>  /etc/exim4/exim4.conf.localmacros
+		echo "TLS_ON_CONNECT_PORTS = 25" >>  /etc/exim4/exim4.conf.localmacros
 		echo "REQUIRE_PROTOCOL = smtps" >>  /etc/exim4/exim4.conf.localmacros
 
-		(
-			echo .ifdef REQUIRE_PROTOCOL
-			echo protocol = REQUIRE_PROTOCOL
-			echo .endif
-		) > /etc/exim4/exim4.conf.template
-
-		(
-			echo .ifdef TLS_ON_CONNECT_PORTS
-			echo tls_on_connect_ports = TLS_ON_CONNECT_PORTS
-			echo .endif
-		) > /etc/exim4/exim4.conf.template
+		sed -i "/.ifdef[[:space:]]MAIN_TLS_ENABLE/a \  .ifdef TLS_ON_CONNECT_PORTS\n      tls_on_connect_ports = TLS_ON_CONNECT_PORTS\n  .endif" /etc/exim4/exim4.conf.template
+		sed -i "1737i .ifdef REQUIRE_PROTOCOL\n    protocol = REQUIRE_PROTOCOL\n.endif" /etc/exim4/exim4.conf.template
 	fi
 elif [ "$RELAY_DOMAINS" ]; then
 	opts+=(
