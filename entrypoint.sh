@@ -70,8 +70,7 @@ elif [ "$SMARTHOST_ADDRESS" ] ; then
 		echo "REQUIRE_PROTOCOL = smtps" >>  /etc/exim4/exim4.conf.localmacros
 
 		sed -i "/.ifdef[[:space:]]MAIN_TLS_ENABLE/a \  .ifdef TLS_ON_CONNECT_PORTS\n      tls_on_connect_ports = TLS_ON_CONNECT_PORTS\n  .endif" /etc/exim4/exim4.conf.template
-		sed -i '/.ifdef[[:space:]]REMOTE_SMTP_SMARTHOST_HOSTS_REQUIRE_TLS/{n;n;n;i\.ifdef REQUIRE_PROTOCOL\n    protocol = REQUIRE_PROTOCOL\n.endif
-		}' /etc/exim4/exim4.conf.template
+		perl -0777 -i -pe 's/(.ifdef REMOTE_SMTP_SMARTHOST_HOSTS_REQUIRE_TLS[\S\s]+?.endif)/$1\n.ifdef REQUIRE_PROTOCOL\n    protocol = REQUIRE_PROTOCOL\n.endif/' /etc/exim4/exim4.conf.template
 	fi
 elif [ "$RELAY_DOMAINS" ]; then
 	opts+=(
